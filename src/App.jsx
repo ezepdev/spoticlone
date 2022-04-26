@@ -12,10 +12,18 @@ const Container = styled.div`
   background-color: ${primary_color.bg_color};
 `;
 
+const Header = styled.header`
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 const App = (props) => {
   return (
     <Container>
-      <h1>Spoticlone</h1>
+      <Header>
+        <h1>Spoticlone</h1>
+      </Header>
     </Container>
   );
 };
