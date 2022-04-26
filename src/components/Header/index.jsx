@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
-  min-width: 100%;
+  grid-area: header;
+  background-color: #000;
   display: flex;
-  justify-content: center;
+  height: fit-content;
+  align-items: center;
+  justify-content: start;
+
+  & > * {
+    margin: 20px;
+  }
 `;
