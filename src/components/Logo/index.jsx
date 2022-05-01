@@ -7,16 +7,16 @@ const LogoContainer = styled.div`
   justify-content: space-between;
 `;
 
+const ImageContainer = styled.div`
+  width: 50px;
+  height: 50px;
+`;
+
 const LogoTitle = styled.p`
   font-size: 1.2rem;
   font-weight: 700;
   font-family: "BIZ UDPGothic", sans-serif;
   margin-right: 10px;
-`;
-
-const ImageContainer = styled.div`
-  width: 50px;
-  height: 50px;
 `;
 
 const Image = styled.img`
