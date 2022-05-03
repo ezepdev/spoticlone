@@ -5,23 +5,29 @@ import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
 import { Main } from "@/components/Main";
 import { Typography } from "@/components/Typography";
+
 import { Player } from "@/components/Player";
+import { TrackList } from "@/components/TrackList";
 
 import { Card } from "@/components/Card";
+import { useState } from "react";
 
 const App = () => {
+  const [tracks, setTracks] = useState(["Love", "Hate"]);
+
   return (
     <Grid
       container
       height="100vh"
       areas="'header content' 'header content' 'player player'"
-      columns="15% 85%"
+      columns="20% 80%"
       rows="1fr 1fr auto "
     >
       <Grid item area="header" bg_color="#000">
         <Header>
           <Logo />
         </Header>
+        {tracks && <TrackList tracks={tracks} />}
       </Grid>
       <Grid item area="content" bg_color="#121212">
         <Main>
