@@ -1,63 +1,52 @@
-import { Box, Grid, FlexBox } from "@/components/Container";
-import { Artists } from "@/components/Artists";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import { URL_AUTH } from "@/const";
+import Home from "@/pages/Home";
 
-import { Header } from "@/components/Header";
-import { Logo } from "@/components/Logo";
-import { Main } from "@/components/Main";
-import { Typography } from "@/components/Typography";
+function decodeHash(hash) {
+  const hash_without_cat = hash.slice(1);
 
-import { Player } from "@/components/Player";
-import { TrackList } from "@/components/TrackList";
+  const list_of_params_and_values = hash_without_cat.split("&");
 
-import { Card } from "@/components/Card";
-import { useState } from "react";
+  return list_of_params_and_values.reduce((hash_params, currentValue) => {
+    const [key, value] = currentValue.split("=");
+    hash_params[key] = value;
+    return hash_params;
+  }, {});
+}
+
+const RequireAuth = ({ children }) => {
+  const location = useLocation();
+  const { access_token } = decodeHash(location.hash);
+  if (access_token === undefined)
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  return children;
+};
+
+const LoginPage = () => {
+  return <a href={URL_AUTH}> Login with Spotify </a>;
+};
 
 const App = () => {
-  const [tracks, setTracks] = useState(["Love", "Hate"]);
-
   return (
-    <Grid
-      container
-      height="100vh"
-      areas="'header content' 'header content' 'player player'"
-      columns="20% 80%"
-      rows="1fr 1fr auto "
-    >
-      <Grid item area="header" bg_color="#000">
-        <Header>
-          <Logo />
-        </Header>
-        {tracks && <TrackList tracks={tracks} />}
-      </Grid>
-      <Grid item area="content" bg_color="#121212">
-        <Main>
-          <Box as="section" color="#fff">
-            <Typography as="h2" color="inherit">
-              Artistas
-            </Typography>
-            <FlexBox container width="fit-content" padding="5px" gap="1.5em">
-              <Artists
-                render={({ artists }) => {
-                  return artists.map((artist) => (
-                    <FlexBox key={artist.name} item>
-                      <Card
-                        img_shape="circle"
-                        name={artist.name}
-                        image={artist.image}
-                        type={artist.type}
-                      />
-                    </FlexBox>
-                  ));
-                }}
-              />
-            </FlexBox>
-          </Box>
-        </Main>
-      </Grid>
-      <Grid item area="player" bg_color="#181818">
-        <Player></Player>
-      </Grid>
-    </Grid>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
+          }
+        />
+        <Route path="/login" element={<LoginPage />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
