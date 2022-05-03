@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import { Box } from "@/components/Container";
 
-export const Main = styled.main`
-  padding: 10px 30px;
-  color: white;
-`;
+export const Main = ({ children }) => (
+  <Box as="main" padding="10px 30px" color="#fff">
+    {children}
+  </Box>
+);

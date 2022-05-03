@@ -1,34 +1,25 @@
 import logo from "@/spotify.png";
-import styled from "styled-components";
 
-const LogoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+import { FlexBox, Box } from "@/components/Container";
+import { Typography } from "@/components/Typography/index";
 
-const ImageContainer = styled.div`
-  width: 50px;
-  height: 50px;
-`;
-
-const LogoTitle = styled.p`
-  font-size: 1.2rem;
-  font-weight: 700;
-  font-family: "BIZ UDPGothic", sans-serif;
-  margin-right: 10px;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-`;
+const Image = ({ src }) => (
+  <Box as="img" src={src} min-width="100%" height="100%"></Box>
+);
 
 export const Logo = () => (
-  <LogoContainer>
-    <LogoTitle>Spoticlon</LogoTitle>
-    <ImageContainer>
+  <FlexBox container padding="10px" bg_color="inherit">
+    <Typography
+      as="h1"
+      size="1.3em"
+      weight={700}
+      family="'BIZ UDPGothic', sans-serif"
+      margin-right="10px"
+    >
+      Spoticlon
+    </Typography>
+    <Box width="50px" height="50px">
       <Image src={logo} />
-    </ImageContainer>
-  </LogoContainer>
+    </Box>
+  </FlexBox>
 );

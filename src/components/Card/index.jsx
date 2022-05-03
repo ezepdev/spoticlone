@@ -25,8 +25,10 @@ export const Card = ({ name, image, type, img_shape = "picture" }) => {
         item
         bg_color="#333"
         margin-bottom="1.5rem"
-        width="184px"
-        height="184px"
+        width="15vw"
+        height="15vw"
+        max-width="184px"
+        max-height="184px"
         border-radius={type_of_borders[img_shape]}
         box-shadow="0 8px 24px rgb(0 0 0 / 50%)"
       >
@@ -42,13 +44,14 @@ export const Card = ({ name, image, type, img_shape = "picture" }) => {
       <FlexBox
         item
         container
+        min-height="64px"
         direction="column"
         color="#fff"
         bg_color={!hover ? "inherit" : "#2a2a2a"}
       >
         <Typography
           as="h1"
-          font-size="1rem"
+          size="1rem"
           margin={0}
           padding-bottom={"4px"}
           color="inherit"
@@ -58,7 +61,7 @@ export const Card = ({ name, image, type, img_shape = "picture" }) => {
         </Typography>
         <Typography
           as="span"
-          font-size="0.875rem"
+          size="0.875rem"
           margin={0}
           color="#a7a7a7"
           bg_color="inherit"

@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
 import { Main } from "@/components/Main";
 import { Typography } from "@/components/Typography";
+import { Player } from "@/components/Player";
 
 import { Card } from "@/components/Card";
 
@@ -13,14 +14,16 @@ const App = () => {
     <Grid
       container
       height="100vh"
-      areas="'header header header' 'content content content' 'player player player'"
+      areas="'header content' 'header content' 'player player'"
+      columns="15% 85%"
+      rows="1fr 1fr auto "
     >
-      <Grid item area="header">
+      <Grid item area="header" bg_color="#000">
         <Header>
           <Logo />
         </Header>
       </Grid>
-      <Grid item area="content">
+      <Grid item area="content" bg_color="#121212">
         <Main>
           <Box as="section" color="#fff">
             <Typography as="h2" color="inherit">
@@ -30,12 +33,7 @@ const App = () => {
               <Artists
                 render={({ artists }) => {
                   return artists.map((artist) => (
-                    <FlexBox
-                      key={artist.name}
-                      as="a"
-                      item
-                      text-decoration="none"
-                    >
+                    <FlexBox key={artist.name} item>
                       <Card
                         img_shape="circle"
                         name={artist.name}
@@ -50,7 +48,9 @@ const App = () => {
           </Box>
         </Main>
       </Grid>
-      <Grid item area="player"></Grid>
+      <Grid item area="player" bg_color="#181818">
+        <Player></Player>
+      </Grid>
     </Grid>
   );
 };
