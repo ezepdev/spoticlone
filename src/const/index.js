@@ -13,10 +13,10 @@ const CREDENTIALS = `client_id=${CLIENT_ID}&response_type=${RESPONSE_TYPE}&redir
   "%20"
 )}&show_dialog=true`;
 
-const API_URL = "https://accounts.spotify.com";
-
+const SPOTIFY_ACCOUNTS_API_URL = "https://accounts.spotify.com";
 const ENDPOINT = {
   AUTHORIZE: "/authorize?",
 };
 
-export const URL_AUTH = `${API_URL}${ENDPOINT.AUTHORIZE}${CREDENTIALS}`;
+export const AUTH_URL = `${SPOTIFY_ACCOUNTS_API_URL}${ENDPOINT.AUTHORIZE}${CREDENTIALS}`;
+export const SPOTIFY_API_URL = "https://api.spotify.com/v1";

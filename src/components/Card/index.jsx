@@ -16,6 +16,8 @@ export const Card = ({ name, image, type, img_shape = "picture" }) => {
       container
       direction="column"
       padding="16px"
+      max-width="180px"
+      min-width="180px"
       border-radius="5px"
       bg_color={!hover ? "#181818" : "#2a2a2a"}
       onMouseOver={() => setHover(true)}
@@ -25,10 +27,8 @@ export const Card = ({ name, image, type, img_shape = "picture" }) => {
         item
         bg_color="#333"
         margin-bottom="1.5rem"
-        width="15vw"
-        height="15vw"
-        max-width="184px"
-        max-height="184px"
+        width="184px"
+        height="184px"
         border-radius={type_of_borders[img_shape]}
         box-shadow="0 8px 24px rgb(0 0 0 / 50%)"
       >

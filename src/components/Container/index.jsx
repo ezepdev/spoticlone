@@ -23,10 +23,11 @@ const flex_container_template = css`
   justify-content: ${(props) => props["justify-content"]};
   gap: ${({ gap }) => gap};
   flex-direction: ${({ direction }) => direction};
-  flex-wrap: ${({ wrap }) => wrap};
+  flex-wrap: ${({ wrap }) => wrap && "wrap"};
 `;
 
 export const Box = styled.div`
+  overflow-y: ${({ overflowY }) => overflowY}};
   ${(props) => props["text-decoration"]};
   margin-right: ${(props) => props["margin-right"]};
   color: ${({ color }) => color || primary_color.color};

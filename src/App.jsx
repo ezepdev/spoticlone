@@ -1,37 +1,7 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
-import { URL_AUTH } from "@/const";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "@/pages/Home";
-
-function decodeHash(hash) {
-  const hash_without_cat = hash.slice(1);
-
-  const list_of_params_and_values = hash_without_cat.split("&");
-
-  return list_of_params_and_values.reduce((hash_params, currentValue) => {
-    const [key, value] = currentValue.split("=");
-    hash_params[key] = value;
-    return hash_params;
-  }, {});
-}
-
-const RequireAuth = ({ children }) => {
-  const location = useLocation();
-  const { access_token } = decodeHash(location.hash);
-  if (access_token === undefined)
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  return children;
-};
-
-const LoginPage = () => {
-  return <a href={URL_AUTH}> Login with Spotify </a>;
-};
-
+import { RequireAuth } from "@/components/RequireAuth";
+import { LoginPage } from "@/pages/LoginPage";
 const App = () => {
   return (
     <BrowserRouter>

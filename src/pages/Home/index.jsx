@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Grid, FlexBox } from "@/components/Container";
-import { Artists } from "@/components/Artists";
-import { useEffect } from "react";
+import { Playlists } from "@/components/Playlists";
 
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
@@ -13,8 +12,7 @@ import { TrackList } from "@/components/TrackList";
 
 import { Card } from "@/components/Card";
 
-const Home = (props) => {
-  const [tracks, setTracks] = useState([]);
+const Home = () => {
   return (
     <Grid
       container
@@ -27,24 +25,35 @@ const Home = (props) => {
         <Header>
           <Logo />
         </Header>
-        {tracks.length !== 0 && <TrackList tracks={tracks} />}
+        {/* {tracks.length !== 0 && <TrackList tracks={tracks} />} */}
       </Grid>
-      <Grid item area="content" bg_color="#121212">
+      <Grid
+        item
+        area="content"
+        max-height="100vh"
+        overflowY="scroll"
+        bg_color="#121212"
+      >
         <Main>
           <Box as="section" color="#fff">
             <Typography as="h2" color="inherit">
-              Artistas
+              Toplists
             </Typography>
-            <FlexBox container width="fit-content" padding="5px" gap="1.5em">
-              <Artists
-                render={({ artists }) => {
-                  return artists.map((artist) => (
-                    <FlexBox key={artist.name} item>
+            <FlexBox
+              wrap
+              container
+              width="fit-content"
+              padding="5px"
+              gap="1.5em"
+            >
+              <Playlists
+                render={({ playlists }) => {
+                  return playlists.map((playlist) => (
+                    <FlexBox key={playlist.name} item>
                       <Card
-                        img_shape="circle"
-                        name={artist.name}
-                        image={artist.image}
-                        type={artist.type}
+                        name={playlist.name}
+                        image={playlist.images[0].url}
+                        type={playlist.type}
                       />
                     </FlexBox>
                   ));
