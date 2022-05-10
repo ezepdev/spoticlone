@@ -17,8 +17,6 @@ export const useAuth = () => {
   const location = useLocation();
   const { access_token } = decodeHash(location.hash);
 
-  useEffect(() => {}, []);
-
   if (access_token) {
     localStorage.setItem("token", JSON.stringify(access_token));
   }

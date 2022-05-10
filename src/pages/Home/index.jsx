@@ -8,11 +8,12 @@ import { Main } from "@/components/Main";
 import { Typography } from "@/components/Typography";
 
 import { Player } from "@/components/Player";
-import { TrackList } from "@/components/TrackList";
 
 import { Card } from "@/components/Card";
 
 const Home = () => {
+  const [tracks, setTracks] = useState([]);
+
   return (
     <Grid
       container
@@ -25,7 +26,7 @@ const Home = () => {
         <Header>
           <Logo />
         </Header>
-        {/* {tracks.length !== 0 && <TrackList tracks={tracks} />} */}
+        {tracks.length !== 0 && <TrackList tracks={tracks} />}
       </Grid>
       <Grid
         item
@@ -37,7 +38,7 @@ const Home = () => {
         <Main>
           <Box as="section" color="#fff">
             <Typography as="h2" color="inherit">
-              Toplists
+              TOPLISTS
             </Typography>
             <FlexBox
               wrap
@@ -49,7 +50,13 @@ const Home = () => {
               <Playlists
                 render={({ playlists }) => {
                   return playlists.map((playlist) => (
-                    <FlexBox key={playlist.name} item>
+                    <FlexBox
+                      key={playlist.name}
+                      item
+                      onClick={() => {
+                        console.log("tocastes el playlist" + playlist.name);
+                      }}
+                    >
                       <Card
                         name={playlist.name}
                         image={playlist.images[0].url}

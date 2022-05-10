@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
-import SpotifyWebApi from "spotify-web-api-js";
 import { useAuth } from "@/hooks/useAuth";
+import { getToplists } from "@/services";
 
 export const Playlists = ({ render }) => {
   const [playlists, setPlaylists] = useState([]);
   const access_token = useAuth();
 
   useEffect(() => {
-    let spotify = new SpotifyWebApi();
-    let toplists_category_id = "toplists";
-    spotify.setAccessToken(access_token);
-    spotify
-      .getCategoryPlaylists(toplists_category_id)
-      .then((res) => setPlaylists(res.playlists.items));
+    getToplists(access_token).then((toplists) => setPlaylists(toplists.items));
   }, []);
 
   if (playlists === []) return <h1>Cargando</h1>;
