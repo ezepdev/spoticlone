@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 function decodeHash(hash) {
@@ -17,8 +16,5 @@ export const useAuth = () => {
   const location = useLocation();
   const { access_token } = decodeHash(location.hash);
 
-  if (access_token) {
-    localStorage.setItem("token", JSON.stringify(access_token));
-  }
   return access_token;
 };

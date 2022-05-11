@@ -1,71 +1,68 @@
-import { css } from "styled-components";
+import { Typography } from "@/components/Typography";
 import { FlexBox, Box } from "@/components/Container";
-import { Typography } from "@/components/Typography/index";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "@/App";
 
 const type_of_borders = {
   picture: "5px",
   circle: "100%",
 };
 
-export const Card = ({ name, image, type, img_shape = "picture" }) => {
+export const Card = ({
+  name,
+  image,
+  type,
+  imageShape = "picture",
+  onClick,
+}) => {
   const [hover, setHover] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <FlexBox
+      onClick={onClick}
       container
       direction="column"
       padding="16px"
-      max-width="180px"
-      min-width="180px"
-      border-radius="5px"
-      bg_color={!hover ? "#181818" : "#2a2a2a"}
+      maxWidth="180px"
+      minWidth="180px"
+      borderRadius="5px"
+      bgColor={
+        !hover
+          ? theme.background.elevated.base
+          : theme.background.elevated.highlight
+      }
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <FlexBox
         item
-        bg_color="#333"
-        margin-bottom="1.5rem"
+        marginBottom="1.5rem"
         width="184px"
         height="184px"
-        border-radius={type_of_borders[img_shape]}
-        box-shadow="0 8px 24px rgb(0 0 0 / 50%)"
+        borderRadius={type_of_borders[imageShape]}
+        boxShadow="0 8px 24px rgb(0 0 0 / 50%)"
       >
         <Box
           as="img"
           src={image}
-          border-radius="inherit"
+          borderRadius="inherit"
           max-width="100%"
           height="100%"
-          object-fit="cover"
+          objectFit="cover"
         />
       </FlexBox>
       <FlexBox
-        item
         container
-        min-height="64px"
+        item
+        color={theme.text.base}
         direction="column"
-        color="#fff"
-        bg_color={!hover ? "inherit" : "#2a2a2a"}
+        minHeight="64px"
       >
-        <Typography
-          as="h1"
-          size="1rem"
-          margin={0}
-          padding-bottom={"4px"}
-          color="inherit"
-          bg_color="inherit"
-        >
+        <Typography as="h1" size="1rem" margin={0} paddingBottom="4px">
           {name}
         </Typography>
-        <Typography
-          as="span"
-          size="0.875rem"
-          margin={0}
-          color="#a7a7a7"
-          bg_color="inherit"
-        >
+        <Typography as="span" size="0.875rem" color={theme.text.subdued}>
           {type}
         </Typography>
       </FlexBox>

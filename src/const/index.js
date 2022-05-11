@@ -1,9 +1,14 @@
-const CLIENT_ID = "14e59a779b4c4c64a15749b104095c1b";
+const CLIENT_ID = "6b1562a946fe42178d476b99eb0b1f92";
 const RESPONSE_TYPE = "token";
 const REDIRECT_URI = "http://localhost:3000";
 const SCOPES = [
   "user-read-currently-playing",
   "user-top-read",
+  "user-library-modify",
+  "user-library-read",
+  "user-read-email",
+  "user-read-private",
+  "streaming",
   "user-read-playback-state",
   "user-modify-playback-state",
   "user-read-recently-played",

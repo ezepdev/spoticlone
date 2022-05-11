@@ -8,4 +8,11 @@ function getToplists(access_token) {
     .then((response) => response["playlists"]);
 }
 
-export { getToplists };
+function getTracksOfPlaylist(id, access_token) {
+  spotify.setAccessToken(access_token);
+  return spotify.getPlaylistTracks(id, { limit: 20 }).then((res) => {
+    return res.items;
+  });
+}
+
+export { getToplists, getTracksOfPlaylist };

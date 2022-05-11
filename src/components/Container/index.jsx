@@ -1,9 +1,5 @@
 import styled, { css } from "styled-components";
 
-const primary_color = {
-  color: "#1ED760",
-};
-
 const grid_element_template = css`
   grid-area: ${({ area }) => area};
 `;
@@ -27,25 +23,26 @@ const flex_container_template = css`
 `;
 
 export const Box = styled.div`
-  overflow-y: ${({ overflowY }) => overflowY}};
   ${(props) => props["text-decoration"]};
-  margin-right: ${(props) => props["margin-right"]};
-  color: ${({ color }) => color || primary_color.color};
+  background-color: ${({ bgColor = "inherit" }) => bgColor};
+  color: ${({ color = "inherit" }) => color};
+  overflow-y: ${({ overflowY }) => overflowY}};
   padding: ${({ padding }) => padding};
-  padding-bottom: ${(props) => props["padding-bottom"]};
-  box-shadow: ${(props) => props["box-shadow"]};
-  min-width: ${(props) => props["min-width"]};
-  min-height: ${(props) => props["min-height"]};
-  max-width: ${(props) => props["max-width"]};
-  max-height: ${(props) => props["max-height"]};
+  border: ${({ border }) => border};
+  margin-right: ${({ marginRight }) => marginRight};
+  padding-bottom: ${({ paddingBottom }) => paddingBottom};
+  box-shadow: ${({ boxShadow }) => boxShadow};
+  min-width: ${({ minWidth }) => minWidth};
+  min-height: ${({ minHeight }) => minHeight};
+  max-width: ${({ maxWidth }) => maxWidth};
+  max-height: ${({ maxHeight }) => maxHeight};
   margin: ${({ margin }) => margin};
-  margin-bottom: ${(props) => props["margin-bottom"]};
-  border-radius: ${(props) => props["border-radius"]};
+  margin-left: ${({ marginLeft }) => marginLeft};
+  margin-bottom: ${({ marginBottom }) => marginBottom};
+  border-radius: ${({ borderRadius }) => borderRadius};
   width: ${({ width }) => width};
-  max-width: ${(props) => props["max-width"]};
   height: ${({ height }) => height};
-  object-fit: ${(props) => props["object-fit"]};
-  background-color: ${({ bg_color }) => bg_color || "inherit"};
+  object-fit: ${({ objectFit }) => objectFit};
 `;
 
 export const FlexBox = styled(Box)`

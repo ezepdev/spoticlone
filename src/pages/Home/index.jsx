@@ -1,78 +1,44 @@
-import { useEffect, useState } from "react";
-import { Box, Grid, FlexBox } from "@/components/Container";
-import { Playlists } from "@/components/Playlists";
+import { ThemeContext } from "@/App";
+
+import { useContext, useState } from "react";
+import { Grid } from "@/components/Container";
 
 import { Header } from "@/components/Header";
-import { Logo } from "@/components/Logo";
 import { Main } from "@/components/Main";
-import { Typography } from "@/components/Typography";
 
 import { Player } from "@/components/Player";
 
-import { Card } from "@/components/Card";
-
 const Home = () => {
-  const [tracks, setTracks] = useState([]);
+  const { theme } = useContext(ThemeContext);
+  const [chosenPlaylist, setChosenPlaylist] = useState({});
 
   return (
     <Grid
       container
       height="100vh"
       areas="'header content' 'header content' 'player player'"
-      columns="20% 80%"
+      columns="300px auto"
       rows="1fr 1fr auto"
     >
-      <Grid item area="header" bg_color="#000">
-        <Header>
-          <Logo />
-        </Header>
-        {tracks.length !== 0 && <TrackList tracks={tracks} />}
+      <Grid item area="header" bgColor={theme.background.press}>
+        <Header chosenPlaylist={chosenPlaylist} />
       </Grid>
       <Grid
         item
         area="content"
-        max-height="100vh"
+        maxHeight="100vh"
         overflowY="scroll"
-        bg_color="#121212"
+        bgColor={theme.background.base}
       >
-        <Main>
-          <Box as="section" color="#fff">
-            <Typography as="h2" color="inherit">
-              TOPLISTS
-            </Typography>
-            <FlexBox
-              wrap
-              container
-              width="fit-content"
-              padding="5px"
-              gap="1.5em"
-            >
-              <Playlists
-                render={({ playlists }) => {
-                  return playlists.map((playlist) => (
-                    <FlexBox
-                      key={playlist.name}
-                      item
-                      onClick={() => {
-                        console.log("tocastes el playlist" + playlist.name);
-                      }}
-                    >
-                      <Card
-                        name={playlist.name}
-                        image={playlist.images[0].url}
-                        type={playlist.type}
-                      />
-                    </FlexBox>
-                  ));
-                }}
-              />
-            </FlexBox>
-          </Box>
-        </Main>
+        <Main
+          onChoisePlaylist={(playlist) => setChosenPlaylist(playlist)}
+          theme={theme}
+        />
       </Grid>
+      {/* 
       <Grid item area="player" bg_color="#181818">
-        <Player></Player>
-      </Grid>
+        <Player />
+      </Grid> */}
     </Grid>
   );
 };
