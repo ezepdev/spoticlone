@@ -1,27 +1,28 @@
+import { useContext } from "react";
+import { ThemeContext } from "@/contexts/Theme";
+import { useEffect, useState } from "react";
 import { FlexBox, Box } from "@/components/Container/index";
 import { Typography } from "@/components/Typography/index";
 import { useAuth } from "@/hooks/useAuth";
 import { getTracksOfPlaylist } from "@/services";
-import SpotifyWebPlayer from "react-spotify-web-playback";
-import { useEffect, useState } from "react";
 
-const ChosenPlaylist = ({ playlist = {} }) => {
+const ChosenPlaylist = ({ playlist = {}, onChoiseTrack }) => {
   const access_token = useAuth();
+
+  const { theme } = useContext(ThemeContext);
   const [tracks, setTracks] = useState([]);
-  const [selectTrack, setSelectTrack] = useState("");
+  const [chosenTrack, setChosenTrack] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     getTracksOfPlaylist(playlist.id, access_token).then((tracks) => {
-      setTracks(tracks.slice(0, 1));
+      setTracks(tracks.slice(0, 5));
       setLoading(false);
     });
   }, [playlist]);
 
-  console.log(selectTrack);
-
-  return loading || tracks === [] ? (
+  return loading || tracks == [] ? (
     <Box container max-width="100%" padding="30px" color="#fff">
       Cargando
     </Box>
@@ -35,15 +36,17 @@ const ChosenPlaylist = ({ playlist = {} }) => {
               key={track.id}
               item
               marginLeft="20px"
-              color={selectTrack === track.id ? null : "inherit"}
-              onClick={() => setSelectTrack(track)}
+              onClick={() => {
+                onChoiseTrack(track);
+                setChosenTrack(track.id);
+              }}
             >
-              <Typography as="p">{track.name}</Typography>
-              <SpotifyWebPlayer
-                token={access_token}
-                uris={selectTrack.uri}
-                play={true}
-              ></SpotifyWebPlayer>
+              <Typography
+                color={track.id === chosenTrack && theme.essential.base}
+                as="p"
+              >
+                {track.name}
+              </Typography>
             </FlexBox>
           );
         })}

@@ -15,7 +15,7 @@ export const Playlists = ({ render }) => {
   }, []);
 
   if (error) return <Navigate to="/login" />;
-  if (playlists === []) return <h1>Cargando</h1>;
+  if (playlists == []) return <h1>Cargando</h1>;
 
   return render({ playlists });
 };

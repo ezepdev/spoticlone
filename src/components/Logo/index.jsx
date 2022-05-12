@@ -3,7 +3,7 @@ import logo from "@/spotify.png";
 import { FlexBox, Box } from "@/components/Container";
 import { Typography } from "@/components/Typography";
 import { useContext } from "react";
-import { ThemeContext } from "@/App";
+import { ThemeContext } from "@/contexts/Theme";
 
 const Image = ({ src }) => (
   <Box as="img" src={src} minWidth="100%" height="100%"></Box>

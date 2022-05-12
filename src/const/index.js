@@ -23,5 +23,26 @@ const ENDPOINT = {
   AUTHORIZE: "/authorize?",
 };
 
+export const THEME = {
+  DARK: {
+    color: "#1ED760",
+    text: {
+      base: "#fff",
+      subdued: "#a7a7a7",
+    },
+    essential: {
+      base: "#1ed760",
+    },
+    background: {
+      base: "#121212",
+      press: "#000",
+      elevated: {
+        base: "#181818",
+        highlight: "#2a2a2a",
+      },
+    },
+  },
+};
+
 export const AUTH_URL = `${SPOTIFY_ACCOUNTS_API_URL}${ENDPOINT.AUTHORIZE}${CREDENTIALS}`;
 export const SPOTIFY_API_URL = "https://api.spotify.com/v1";

@@ -1,16 +1,20 @@
-import { ThemeContext } from "@/App";
-
+import { FlexBox } from "@/components/Container";
+import { Logo } from "@/components/Logo";
+import { ThemeContext } from "@/contexts/Theme";
 import { useContext, useState } from "react";
+
 import { Grid } from "@/components/Container";
 
-import { Header } from "@/components/Header";
 import { Main } from "@/components/Main";
+import { Header } from "@/components/Header";
 
 import { Player } from "@/components/Player";
+import { ChosenPlaylist } from "@/components/ChosenPlaylist";
 
 const Home = () => {
   const { theme } = useContext(ThemeContext);
   const [chosenPlaylist, setChosenPlaylist] = useState({});
+  const [selectTrack, setSelectTrack] = useState({});
 
   return (
     <Grid
@@ -21,7 +25,19 @@ const Home = () => {
       rows="1fr 1fr auto"
     >
       <Grid item area="header" bgColor={theme.background.press}>
-        <Header chosenPlaylist={chosenPlaylist} />
+        <FlexBox container as="header" direction="column" padding="10px">
+          <FlexBox item>
+            <Logo />
+          </FlexBox>
+          <FlexBox item>
+            {Object.keys(chosenPlaylist).length !== 0 && (
+              <ChosenPlaylist
+                playlist={chosenPlaylist}
+                onChoiseTrack={(track) => setSelectTrack(track)}
+              />
+            )}
+          </FlexBox>
+        </FlexBox>
       </Grid>
       <Grid
         item
@@ -35,10 +51,9 @@ const Home = () => {
           theme={theme}
         />
       </Grid>
-      {/* 
-      <Grid item area="player" bg_color="#181818">
-        <Player />
-      </Grid> */}
+      <Grid item area="player" bgColor={theme.background.base} padding="10px">
+        <Player track={selectTrack} />
+      </Grid>
     </Grid>
   );
 };

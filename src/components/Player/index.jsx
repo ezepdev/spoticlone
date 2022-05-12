@@ -1,29 +1,26 @@
 import { FlexBox } from "@/components/Container";
 import { Typography } from "@/components/Typography/index";
+import { useAuth } from "@/hooks/useAuth";
+import SpotifyWebPlayer from "react-spotify-web-playback";
+import { ThemeContext } from "@/contexts/Theme";
+import { useContext } from "react";
 
-export const Player = (props) => {
+export const Player = ({ track = {} }) => {
+  const access_token = useAuth();
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <FlexBox
-      container
-      justify-content="space-evenly"
-      align-items="center"
-      min-height="80px"
-      width="100%"
-      color="white"
-    >
-      <Typography as="p" color="white">
-        Previous
-      </Typography>
-      <Typography as="h2" color="white">
-        Pausar
-      </Typography>
-      <Typography as="h2" color="white">
-        Reproducir
-      </Typography>
-
-      <Typography as="p" color="white">
-        Next
-      </Typography>
-    </FlexBox>
+    <SpotifyWebPlayer
+      token={access_token}
+      uris={track.uri || []}
+      play={Object.keys(track).length !== 0}
+      magnifySliderOnHover
+      syncExternalDevice={false}
+      styles={{
+        bgColor: theme.background.base,
+        color: theme.text.base,
+        height: "80px",
+      }}
+    ></SpotifyWebPlayer>
   );
 };

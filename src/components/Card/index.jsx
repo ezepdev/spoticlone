@@ -1,7 +1,7 @@
 import { Typography } from "@/components/Typography";
 import { FlexBox, Box } from "@/components/Container";
 import { useContext, useState } from "react";
-import { ThemeContext } from "@/App";
+import { ThemeContext } from "@/contexts/Theme";
 
 const type_of_borders = {
   picture: "5px",
