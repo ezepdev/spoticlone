@@ -4,4 +4,5 @@ import { Box } from "@/components/Container";
 export const Typography = styled(Box)`
   font-size: ${({ size }) => size};
   font-weight: ${({ weight }) => weight};
+  text-transform: ${({ capitalize }) => capitalize && "capitalize"};
 `;

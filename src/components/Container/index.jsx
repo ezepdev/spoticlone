@@ -15,8 +15,8 @@ const grid_container_template = css`
 
 const flex_container_template = css`
   display: flex;
-  align-items: ${(props) => props["align-items"]};
-  justify-content: ${(props) => props["justify-content"]};
+  align-items: ${({ alignItems }) => alignItems};
+  justify-content: ${({ justifyContent }) => justifyContent};
   gap: ${({ gap }) => gap};
   flex-direction: ${({ direction }) => direction};
   flex-wrap: ${({ wrap }) => wrap && "wrap"};

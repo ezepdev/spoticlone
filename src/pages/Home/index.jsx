@@ -6,7 +6,6 @@ import { useContext, useState } from "react";
 import { Grid } from "@/components/Container";
 
 import { Main } from "@/components/Main";
-import { Header } from "@/components/Header";
 
 import { Player } from "@/components/Player";
 import { ChosenPlaylist } from "@/components/ChosenPlaylist";
@@ -42,7 +41,6 @@ const Home = () => {
       <Grid
         item
         area="content"
-        maxHeight="100vh"
         overflowY="scroll"
         bgColor={theme.background.base}
       >
