@@ -9,11 +9,12 @@ import { Main } from "@/components/Main";
 
 import { Player } from "@/components/Player";
 import { ChosenPlaylist } from "@/components/ChosenPlaylist";
-
+import { Typography } from "@/components/Typography/index";
+import { usePlayer } from "@/hooks/usePlayer";
 const Home = () => {
+  const { playingTrack, setPlayingTrack, setIsPlaying } = usePlayer();
   const { theme } = useContext(ThemeContext);
   const [chosenPlaylist, setChosenPlaylist] = useState({});
-  const [selectTrack, setSelectTrack] = useState({});
 
   return (
     <Grid
@@ -29,10 +30,14 @@ const Home = () => {
             <Logo />
           </FlexBox>
           <FlexBox item>
-            {Object.keys(chosenPlaylist).length !== 0 && (
+            {isEmptyObject(chosenPlaylist) ? (
+              <Typography color={theme.text.base}>
+                Selecciona una playlist
+              </Typography>
+            ) : (
               <ChosenPlaylist
                 playlist={chosenPlaylist}
-                onChoiseTrack={(track) => setSelectTrack(track)}
+                onChoiseTrack={(track) => setPlayingTrack(track)}
               />
             )}
           </FlexBox>
@@ -50,10 +55,17 @@ const Home = () => {
         />
       </Grid>
       <Grid item area="player" bgColor={theme.background.base} padding="10px">
-        <Player track={selectTrack} />
+        <Player
+          currentTrack={playingTrack}
+          onPlayChange={(isPlaying) => setIsPlaying(isPlaying)}
+        />
       </Grid>
     </Grid>
   );
+
+  function isEmptyObject(object) {
+    return Object.keys(object).length === 0;
+  }
 };
 
 export default Home;

@@ -7,30 +7,78 @@ import { useAuth } from "@/hooks/useAuth";
 import { getTracksOfPlaylist } from "@/services";
 import ClipLoader from "react-spinners/ClipLoader";
 import BounceLoader from "react-spinners/BounceLoader";
+import { usePlayer } from "@/hooks/usePlayer";
 
-const ChosenPlaylist = ({ playlist = {}, onChoiseTrack }) => {
+const ChosenPlaylistLoader = ({ theme }) => (
+  <FlexBox
+    container
+    height="10vh"
+    justifyContent="center"
+    alignItems="center"
+    padding="25px"
+  >
+    <ClipLoader color={theme.essential.base} loading={true} size="40px" />
+  </FlexBox>
+);
+
+const Track = ({ id, name, index, onChoise, theme }) => {
+  const { playingTrack, isPlaying } = usePlayer();
+
+  return (
+    <FlexBox
+      key={id}
+      item
+      container
+      alignItems="center"
+      onClick={() => onChoise()}
+    >
+      {(playingTrack === undefined || id != playingTrack.id) && (
+        <Typography as="span" color={theme.text.subdued}>
+          {index + 1}
+        </Typography>
+      )}
+      <BounceLoader
+        speedMultiplier={isPlaying ? 1 : 0}
+        loading={playingTrack != undefined && id === playingTrack.id}
+        color={theme.essential.base}
+        size={15}
+      />
+      <Typography
+        color={
+          playingTrack != undefined &&
+          id === playingTrack.id &&
+          theme.essential.base
+        }
+        as="p"
+        margin="8px"
+      >
+        {name}
+      </Typography>
+    </FlexBox>
+  );
+};
+
+const ChosenPlaylist = ({ playlist = {} }) => {
   const { theme } = useContext(ThemeContext);
   const access_token = useAuth();
+  const { setPlayingTrack } = usePlayer();
 
-  const [tracks, setTracks] = useState([]);
-  const [chosenTrack, setChosenTrack] = useState({});
-
+  console.log(playlist);
   const [loading, setLoading] = useState(true);
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     getTracksOfPlaylist(playlist.id, access_token).then((tracks) => {
-      setTracks(tracks.slice(0, 9));
+      setTracks(tracks.slice(0, 10));
       setLoading(false);
     });
   }, [playlist]);
 
   return loading ? (
-    <FlexBox container height="100%" justifyContent="center" padding="30px">
-      <ClipLoader color={theme.essential.base} loading={true} size="50px" />
-    </FlexBox>
+    <ChosenPlaylistLoader theme={theme} />
   ) : (
-    <Box container width="100%" padding="20px" color="#fff">
+    <Box container maxWidth="100%" padding="25px" color="#fff">
       <Typography
         as="h3"
         size="1.2rem"
@@ -41,40 +89,15 @@ const ChosenPlaylist = ({ playlist = {}, onChoiseTrack }) => {
         {playlist.name}
       </Typography>
       <FlexBox container direction="column">
-        {tracks.map(({ track }, index) => {
-          return (
-            <FlexBox
-              key={track.id}
-              item
-              container
-              alignItems="center"
-              onClick={() => {
-                onChoiseTrack(track);
-                setChosenTrack(track.id);
-              }}
-            >
-              <>
-                {track.id != chosenTrack && (
-                  <Typography as="span" margin="0 8px">
-                    {index + 1}
-                  </Typography>
-                )}
-                <BounceLoader
-                  loading={track.id === chosenTrack}
-                  color={theme.essential.base}
-                  size={25}
-                />
-              </>
-              <Typography
-                color={track.id === chosenTrack && theme.essential.base}
-                as="p"
-                margin="8px"
-              >
-                {track.name}
-              </Typography>
-            </FlexBox>
-          );
-        })}
+        {tracks.map(({ track }, index) => (
+          <Track
+            id={track.id}
+            index={index}
+            theme={theme}
+            name={track.name}
+            onChoise={() => setPlayingTrack(track)}
+          />
+        ))}
       </FlexBox>
     </Box>
   );

@@ -27,10 +27,16 @@ export const Box = styled.div`
   background-color: ${({ bgColor = "inherit" }) => bgColor};
   color: ${({ color = "inherit" }) => color};
   overflow-y: ${({ overflowY }) => overflowY}};
+  overflow: ${({ overflow }) => overflow}};
+  position: ${({ position }) => position}};
+  left: ${({ left }) => left}};
+  right: ${({ right }) => right}};
+
   padding: ${({ padding }) => padding};
   border: ${({ border }) => border};
   margin-right: ${({ marginRight }) => marginRight};
   padding-bottom: ${({ paddingBottom }) => paddingBottom};
+  padding-right: ${({ paddingRight }) => paddingRight};
   box-shadow: ${({ boxShadow }) => boxShadow};
   min-width: ${({ minWidth }) => minWidth};
   min-height: ${({ minHeight }) => minHeight};
