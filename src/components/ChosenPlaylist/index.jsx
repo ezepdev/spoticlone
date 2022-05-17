@@ -9,20 +9,25 @@ import ClipLoader from "react-spinners/ClipLoader";
 import BounceLoader from "react-spinners/BounceLoader";
 import { usePlayer } from "@/hooks/usePlayer";
 
-const ChosenPlaylistLoader = ({ theme }) => (
-  <FlexBox
-    container
-    height="10vh"
-    justifyContent="center"
-    alignItems="center"
-    padding="25px"
-  >
-    <ClipLoader color={theme.essential.base} loading={true} size="40px" />
-  </FlexBox>
-);
+const ChosenPlaylistLoader = () => {
+  const { theme } = useContext(ThemeContext);
 
-const Track = ({ id, name, index, onChoise, theme }) => {
+  return (
+    <FlexBox
+      container
+      height="10vh"
+      justifyContent="center"
+      alignItems="center"
+      padding="25px"
+    >
+      <ClipLoader color={theme.essential.base} loading={true} size="40px" />
+    </FlexBox>
+  );
+};
+
+const Track = ({ id, name, index, onChoise }) => {
   const { playingTrack, isPlaying } = usePlayer();
+  const { theme } = useContext(ThemeContext);
 
   return (
     <FlexBox
@@ -76,7 +81,7 @@ const ChosenPlaylist = ({ playlist = {} }) => {
   }, [playlist]);
 
   return loading ? (
-    <ChosenPlaylistLoader theme={theme} />
+    <ChosenPlaylistLoader />
   ) : (
     <Box container maxWidth="100%" padding="25px" color="#fff">
       <Typography
@@ -93,7 +98,6 @@ const ChosenPlaylist = ({ playlist = {} }) => {
           <Track
             id={track.id}
             index={index}
-            theme={theme}
             name={track.name}
             onChoise={() => setPlayingTrack(track)}
           />

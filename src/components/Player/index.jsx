@@ -1,7 +1,5 @@
-import { FlexBox } from "@/components/Container";
-import { Typography } from "@/components/Typography/index";
-import { useAuth } from "@/hooks/useAuth";
 import SpotifyWebPlayer from "react-spotify-web-playback";
+import { useAuth } from "@/hooks/useAuth";
 import { ThemeContext } from "@/contexts/Theme";
 import { useContext } from "react";
 
@@ -24,6 +22,6 @@ export const Player = ({ currentTrack = {}, onPlayChange }) => {
         color: theme.text.base,
         height: "80px",
       }}
-    ></SpotifyWebPlayer>
+    />
   );
 };

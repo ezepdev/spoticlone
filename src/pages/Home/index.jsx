@@ -1,7 +1,11 @@
-import { FlexBox } from "@/components/Container";
-import { Logo } from "@/components/Logo";
-import { ThemeContext } from "@/contexts/Theme";
 import { useContext, useState } from "react";
+import { ThemeContext } from "@/contexts/Theme";
+
+import { usePlayer } from "@/hooks/usePlayer";
+
+import { FlexBox } from "@/components/Container";
+import { Typography } from "@/components/Typography/index";
+import { Logo } from "@/components/Logo";
 
 import { Grid } from "@/components/Container";
 
@@ -9,11 +13,14 @@ import { Main } from "@/components/Main";
 
 import { Player } from "@/components/Player";
 import { ChosenPlaylist } from "@/components/ChosenPlaylist";
-import { Typography } from "@/components/Typography/index";
-import { usePlayer } from "@/hooks/usePlayer";
+
+function isEmptyObject(object) {
+  return Object.keys(object).length === 0;
+}
+
 const Home = () => {
-  const { playingTrack, setPlayingTrack, setIsPlaying } = usePlayer();
   const { theme } = useContext(ThemeContext);
+  const { playingTrack, setPlayingTrack, setIsPlaying } = usePlayer();
   const [chosenPlaylist, setChosenPlaylist] = useState({});
 
   return (
@@ -27,7 +34,7 @@ const Home = () => {
       <Grid item area="header" bgColor={theme.background.press}>
         <FlexBox container as="header" direction="column" padding="10px">
           <FlexBox item>
-            <Logo />
+            <Logo size="sm" />
           </FlexBox>
           <FlexBox item>
             {isEmptyObject(chosenPlaylist) ? (
@@ -49,10 +56,7 @@ const Home = () => {
         overflowY="scroll"
         bgColor={theme.background.base}
       >
-        <Main
-          onChoisePlaylist={(playlist) => setChosenPlaylist(playlist)}
-          theme={theme}
-        />
+        <Main onChoisePlaylist={(playlist) => setChosenPlaylist(playlist)} />
       </Grid>
       <Grid item area="player" bgColor={theme.background.base} padding="10px">
         <Player
@@ -62,10 +66,6 @@ const Home = () => {
       </Grid>
     </Grid>
   );
-
-  function isEmptyObject(object) {
-    return Object.keys(object).length === 0;
-  }
 };
 
 export default Home;
