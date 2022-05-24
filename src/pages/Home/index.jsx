@@ -14,9 +14,7 @@ import { Main } from "@/components/Main";
 import { Player } from "@/components/Player";
 import { ChosenPlaylist } from "@/components/ChosenPlaylist";
 
-function isEmptyObject(object) {
-  return Object.keys(object).length === 0;
-}
+import { isEmptyObject } from "@/helpers";
 
 const Home = () => {
   const { theme } = useContext(ThemeContext);
