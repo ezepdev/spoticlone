@@ -1,6 +1,6 @@
 const CLIENT_ID = "6b1562a946fe42178d476b99eb0b1f92";
 const RESPONSE_TYPE = "token";
-const REDIRECT_URI = "http://localhost:3000";
+const REDIRECT_URI = "https://spoticlone-27li2d39x-ezepdev.vercel.app";
 const SCOPES = [
   "user-read-currently-playing",
   "user-top-read",
