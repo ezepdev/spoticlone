@@ -15,39 +15,42 @@ const grid_container_template = css`
 
 const flex_container_template = css`
   display: flex;
-  align-items: ${({ alignItems }) => alignItems};
   justify-content: ${({ justifyContent }) => justifyContent};
+  align-items: ${({ alignItems }) => alignItems};
   gap: ${({ gap }) => gap};
   flex-direction: ${({ direction }) => direction};
   flex-wrap: ${({ wrap }) => wrap && "wrap"};
 `;
 
 export const Box = styled.div`
-  ${(props) => props["text-decoration"]};
   background-color: ${({ bgColor = "inherit" }) => bgColor};
   color: ${({ color = "inherit" }) => color};
-  overflow-y: ${({ overflowY }) => overflowY}};
-  overflow: ${({ overflow }) => overflow}};
-  position: ${({ position }) => position}};
-  left: ${({ left }) => left}};
-  right: ${({ right }) => right}};
-
+  
   padding: ${({ padding }) => padding};
-  border: ${({ border }) => border};
-  margin-right: ${({ marginRight }) => marginRight};
   padding-bottom: ${({ paddingBottom }) => paddingBottom};
   padding-right: ${({ paddingRight }) => paddingRight};
-  box-shadow: ${({ boxShadow }) => boxShadow};
+
+  margin: ${({ margin }) => margin};
+  margin-left: ${({ marginLeft }) => marginLeft};
+  margin-right: ${({ marginRight }) => marginRight};
+  margin-bottom: ${({ marginBottom }) => marginBottom};
+  
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   min-width: ${({ minWidth }) => minWidth};
   min-height: ${({ minHeight }) => minHeight};
   max-width: ${({ maxWidth }) => maxWidth};
   max-height: ${({ maxHeight }) => maxHeight};
-  margin: ${({ margin }) => margin};
-  margin-left: ${({ marginLeft }) => marginLeft};
-  margin-bottom: ${({ marginBottom }) => marginBottom};
+  
+
+  border: ${({ border }) => border};
+  position: ${({ position }) => position}};
+  left: ${({ left }) => left}};
+  right: ${({ right }) => right}};
+  overflow-y: ${({ overflowY }) => overflowY}};
+  overflow: ${({ overflow }) => overflow}};
+  box-shadow: ${({ boxShadow }) => boxShadow};
   border-radius: ${({ borderRadius }) => borderRadius};
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
   object-fit: ${({ objectFit }) => objectFit};
 `;
 

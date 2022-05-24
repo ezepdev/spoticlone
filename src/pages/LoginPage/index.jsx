@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { AUTH_URL } from "@/const";
 import { Logo } from "@/components/Logo";
 import { ThemeContext } from "@/contexts/Theme";
-import { Typography } from "@/components/Typography/index";
+import { LoginButton } from "@/components/Link/index";
 
 const LoginPage = () => {
   const access_token = useAuth();
@@ -27,7 +27,7 @@ const LoginPage = () => {
         justifyContent="space-evenly"
       >
         <Logo />
-        <a href={AUTH_URL}>Login with Spotify</a>
+        <LoginButton href={AUTH_URL}>Login with Spotify</LoginButton>
       </FlexBox>
     </>
   );
