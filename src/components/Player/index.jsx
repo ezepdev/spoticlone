@@ -1,19 +1,20 @@
-import { FlexBox } from "@/components/Container";
-import { Typography } from "@/components/Typography/index";
-import { useAuth } from "@/hooks/useAuth";
 import SpotifyWebPlayer from "react-spotify-web-playback";
+import { useAuth } from "@/hooks/useAuth";
 import { ThemeContext } from "@/contexts/Theme";
 import { useContext } from "react";
 
-export const Player = ({ track = {} }) => {
+export const Player = ({ currentTrack = {}, onPlayChange }) => {
   const access_token = useAuth();
   const { theme } = useContext(ThemeContext);
 
   return (
     <SpotifyWebPlayer
       token={access_token}
-      uris={track.uri || []}
-      play={Object.keys(track).length !== 0}
+      uris={currentTrack.uri}
+      callback={(status) => {
+        onPlayChange(status.isPlaying);
+      }}
+      play={Object.keys(currentTrack).length !== 0}
       magnifySliderOnHover
       syncExternalDevice={false}
       styles={{
@@ -21,6 +22,6 @@ export const Player = ({ track = {} }) => {
         color: theme.text.base,
         height: "80px",
       }}
-    ></SpotifyWebPlayer>
+    />
   );
 };
