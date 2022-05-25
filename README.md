@@ -1,5 +1,9 @@
 # Spoticlone
 
+### Aplicacion desplagada en produccion: https://spoticlone-orpin.vercel.app
+
+### Herramientas utilizadas
+
 Aplicacion construida con React JS, utilizando la API de Spotify. 
 
 ### Ejecucion en local
